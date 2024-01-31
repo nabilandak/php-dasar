@@ -31,6 +31,32 @@ function tambah($data){
     return mysqli_affected_rows($conn);
 }
 
+function ubah($data){
+    global $conn;
+    $id = $data["id"];
+    $nama = htmlspecialchars($data["nama"]);
+    $pengembang = htmlspecialchars($data["pengembang"]);
+    $genre = htmlspecialchars($data["genre"]);
+    $tahun = htmlspecialchars($data["tahun"]);
+    $harga = htmlspecialchars($data["harga"]);
+    $foto = htmlspecialchars($data["foto"]);
+
+
+    // query insert data
+    $query = "UPDATE game SET 
+        nama ='$nama', 
+        pengembang ='$pengembang', 
+        genre ='$genre', 
+        tahun ='$tahun', 
+        harga ='$harga', 
+        foto ='$foto'
+        WHERE id = $id
+        ";
+    
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
 
 function hapus($id){
     global $conn;
@@ -38,5 +64,11 @@ function hapus($id){
     return mysqli_affected_rows($conn);
 }
 
+function cari($keyword){
+    $query = "SELECT * FROM game WHERE nama LIKE '$keyword%' OR pengembang LIKE '$keyword%' or harga LIKE '$keyword%'";
+    return query($query);
+
+}
+   
 
 ?>

@@ -1,9 +1,17 @@
 <?php 
+session_start();
+
+if(!isset($_SESSION['login'])){
+    header('Location: Login.php');
+    exit;
+}
 require 'functions.php';
 
 // cek apakah tombol submit sudah ditekan atau belum
 if(isset($_POST["submit"])){
 // cek apakah data berhasil ditambahkan atau tidak
+ 
+
     if(tambah($_POST) > 0){
         echo "<script>
                 alert('Data berhasil ditambahkan!');
@@ -31,7 +39,7 @@ if(isset($_POST["submit"])){
 <body>
     <h1>Tambah Data Game</h1>
     <a href="index.php">Kembali</a>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <ul>
             <li>
                 <label for="nama">Nama : </label>
@@ -55,7 +63,7 @@ if(isset($_POST["submit"])){
             </li>
             <li>
                 <label for="foto">foto : </label>
-                <input type="text" name="foto" id="foto" required>
+                <input type="file" name="foto" id="foto" required>
             </li>
             <li><button type="submit" name="submit">Tambah Data</button></li>
         </ul>

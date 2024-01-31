@@ -30,7 +30,7 @@ $game = query("SELECT * FROM game");
         <tr>
             <td><?php echo $i; ?></td>
             <td>
-                <a href="">Edit</a> | 
+                <a href="ubah.php?id=<?php echo $g["id"];?>">Edit</a> | 
                 <a href="hapus.php?id=<?php echo $g["id"];?>" onclick="return confirm('Yakin?')">Hapus</a>
             </td>
             <td><img src="img/<?php echo $g["foto"]; ?>" alt="" width="50px"></td>

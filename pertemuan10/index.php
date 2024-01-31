@@ -3,6 +3,11 @@
 require 'functions.php';
 $game = query("SELECT * FROM game");
 
+// tombol cari ditekan
+    if(isset($_POST["cari"])){
+        $game = cari($_POST["keyword"]);
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +19,15 @@ $game = query("SELECT * FROM game");
 <body>
     <h1>Daftar Game</h1>
     <a href="tambah-game.php">Tambah Data Game</a>
+
+    <br>
+    <br>
+
+    <form action="" method="post">
+        <input type="text" name="keyword" size="30px" autofocus placeholder="masukan keyword pencarian" autocomplete="off">
+        <button type="submit" name="cari">Cari!</button>
+    </form>
+    <br>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -30,7 +44,7 @@ $game = query("SELECT * FROM game");
         <tr>
             <td><?php echo $i; ?></td>
             <td>
-                <a href="">Edit</a> | 
+                <a href="ubah.php?id=<?php echo $g["id"];?>">Edit</a> | 
                 <a href="hapus.php?id=<?php echo $g["id"];?>" onclick="return confirm('Yakin?')">Hapus</a>
             </td>
             <td><img src="img/<?php echo $g["foto"]; ?>" alt="" width="50px"></td>
